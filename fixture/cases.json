@@ -1,0 +1,2496 @@
+{
+  "comment": "Cross-language fixture. Synthetic — contains no corpus data. Regenerate with `./gradlew -q fixture`; both implementations must reproduce it.",
+  "count": 28,
+  "vectorCount": 27,
+  "dim": 8,
+  "nowMillis": 1786579200000,
+  "scorePrecision": 6,
+  "cases": [
+    {
+      "name": "relevance-only",
+      "why": "the shipped default: plain cosine, everything else off",
+      "query": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 0.0,
+        "importance": 0.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 10,
+      "candidateMultiplier": 2,
+      "scope": {
+        "includeSuperseded": false,
+        "kinds": [
+          "FACT"
+        ]
+      },
+      "expected": [
+        {
+          "id": "m50",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m31",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 1.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m30",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m21",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 1.0
+        },
+        {
+          "id": "m20",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m13",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m12",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.16503,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m11",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.443354,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m10",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m02",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.129371,
+          "importance": 0.5,
+          "salience": 0.0
+        }
+      ]
+    },
+    {
+      "name": "park-baseline",
+      "why": "the literature baseline, reproduced exactly",
+      "query": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 1.0,
+        "importance": 1.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 138.28257298606084,
+      "k": 10,
+      "candidateMultiplier": 2,
+      "scope": {
+        "includeSuperseded": false,
+        "kinds": [
+          "FACT"
+        ]
+      },
+      "expected": [
+        {
+          "id": "m13",
+          "score": 2.5,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m10",
+          "score": 2.5,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m31",
+          "score": 2.000001,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0E-6,
+          "importance": 1.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m01",
+          "score": 1.9,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.0,
+          "importance": 0.9,
+          "salience": 0.0
+        },
+        {
+          "id": "m11",
+          "score": 1.500018,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.8E-5,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m50",
+          "score": 1.500001,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0E-6,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m21",
+          "score": 1.500001,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0E-6,
+          "importance": 0.5,
+          "salience": 1.0
+        },
+        {
+          "id": "m20",
+          "score": 1.500001,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0E-6,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m12",
+          "score": 1.5,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m02",
+          "score": 1.5,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.0,
+          "importance": 0.5,
+          "salience": 0.0
+        }
+      ]
+    },
+    {
+      "name": "all-four-terms",
+      "why": "every term weighted, including salience",
+      "query": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 1.0,
+        "importance": 1.0,
+        "salience": 1.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 10,
+      "candidateMultiplier": 2,
+      "scope": {
+        "includeSuperseded": false,
+        "kinds": [
+          "FACT"
+        ]
+      },
+      "expected": [
+        {
+          "id": "m21",
+          "score": 2.833028,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 1.0
+        },
+        {
+          "id": "m13",
+          "score": 2.5,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m10",
+          "score": 2.5,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m31",
+          "score": 2.333028,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 1.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m11",
+          "score": 1.943354,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.443354,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m01",
+          "score": 1.9,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.0,
+          "importance": 0.9,
+          "salience": 0.0
+        },
+        {
+          "id": "m50",
+          "score": 1.833028,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m20",
+          "score": 1.833028,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m91",
+          "score": 1.83302,
+          "cosine": 0.999992,
+          "relevance": 0.999992,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m90",
+          "score": 1.83302,
+          "cosine": 0.999992,
+          "relevance": 0.999992,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        }
+      ]
+    },
+    {
+      "name": "tie-break-on-serial",
+      "why": "m01 and m02 are identical to the scorer except serial; the newer must win",
+      "query": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 0.0,
+        "importance": 0.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 4,
+      "candidateMultiplier": 1,
+      "scope": {
+        "includeSuperseded": false,
+        "kinds": [
+          "FACT"
+        ]
+      },
+      "expected": [
+        {
+          "id": "m11",
+          "score": 0.0,
+          "cosine": 1.0,
+          "relevance": 0.0,
+          "recency": 0.443354,
+          "importance": 0.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m10",
+          "score": 0.0,
+          "cosine": 1.0,
+          "relevance": 0.0,
+          "recency": 1.0,
+          "importance": 0.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m02",
+          "score": 0.0,
+          "cosine": 1.0,
+          "relevance": 0.0,
+          "recency": 0.129371,
+          "importance": 0.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m01",
+          "score": 0.0,
+          "cosine": 1.0,
+          "relevance": 0.0,
+          "recency": 0.0,
+          "importance": 1.0,
+          "salience": 0.0
+        }
+      ]
+    },
+    {
+      "name": "degenerate-minmax",
+      "why": "k\u003d1 leaves one candidate, so every term normalises to zero and the score is 0",
+      "query": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 1.0,
+        "importance": 1.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 1,
+      "candidateMultiplier": 1,
+      "scope": {
+        "includeSuperseded": false,
+        "kinds": [
+          "FACT"
+        ]
+      },
+      "expected": [
+        {
+          "id": "m01",
+          "score": 0.0,
+          "cosine": 1.0,
+          "relevance": 0.0,
+          "recency": 0.0,
+          "importance": 0.0,
+          "salience": 0.0
+        }
+      ]
+    },
+    {
+      "name": "recency-park-halflife",
+      "why": "at 5.8 days the term underflows for nearly everything — the pathology, pinned",
+      "query": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 1.0,
+        "importance": 0.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 138.28257298606084,
+      "k": 6,
+      "candidateMultiplier": 2,
+      "scope": {
+        "includeSuperseded": false,
+        "kinds": [
+          "FACT"
+        ]
+      },
+      "expected": [
+        {
+          "id": "m13",
+          "score": 2.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m10",
+          "score": 2.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m11",
+          "score": 1.000018,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.8E-5,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m50",
+          "score": 1.000001,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0E-6,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m31",
+          "score": 1.000001,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0E-6,
+          "importance": 1.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m30",
+          "score": 1.000001,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0E-6,
+          "importance": 0.0,
+          "salience": 0.0
+        }
+      ]
+    },
+    {
+      "name": "recency-91-days",
+      "why": "the default half-life, where the term is a real curve",
+      "query": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 1.0,
+        "importance": 0.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 6,
+      "candidateMultiplier": 2,
+      "scope": {
+        "includeSuperseded": false,
+        "kinds": [
+          "FACT"
+        ]
+      },
+      "expected": [
+        {
+          "id": "m13",
+          "score": 2.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m10",
+          "score": 2.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m11",
+          "score": 1.443354,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.443354,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m50",
+          "score": 1.333028,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m31",
+          "score": 1.333028,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 1.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m30",
+          "score": 1.333028,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.0,
+          "salience": 0.0
+        }
+      ]
+    },
+    {
+      "name": "scope-companion-lena",
+      "why": "lena may see her own fiction and nobody else\u0027s",
+      "query": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 0.0,
+        "importance": 0.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 20,
+      "candidateMultiplier": 2,
+      "scope": {
+        "companionId": "lena",
+        "includeSuperseded": false,
+        "kinds": [
+          "FACT"
+        ]
+      },
+      "expected": [
+        {
+          "id": "m50",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m40",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m31",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 1.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m30",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m21",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.992085
+        },
+        {
+          "id": "m20",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m13",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m12",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.16503,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m11",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.443354,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m10",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m02",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.129371,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m01",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.0,
+          "importance": 0.9,
+          "salience": 0.0
+        },
+        {
+          "id": "m91",
+          "score": 0.999996,
+          "cosine": 0.999992,
+          "relevance": 0.999996,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m90",
+          "score": 0.999996,
+          "cosine": 0.999992,
+          "relevance": 0.999996,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m03",
+          "score": 0.853553,
+          "cosine": 0.707107,
+          "relevance": 0.853553,
+          "recency": 0.406472,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m95",
+          "score": 0.639836,
+          "cosine": 0.279672,
+          "relevance": 0.639836,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.45534
+        },
+        {
+          "id": "m96",
+          "score": 0.634731,
+          "cosine": 0.269462,
+          "relevance": 0.634731,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.639151
+        },
+        {
+          "id": "ma2",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.702,
+          "salience": 0.0
+        },
+        {
+          "id": "ma1",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.701,
+          "salience": 0.0
+        },
+        {
+          "id": "ma0",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.7,
+          "salience": 0.0
+        }
+      ]
+    },
+    {
+      "name": "scope-agnostic-sees-no-fiction",
+      "why": "an asker who is nobody must reach no IN_WORLD memory at all",
+      "query": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 0.0,
+        "importance": 0.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 20,
+      "candidateMultiplier": 2,
+      "scope": {
+        "includeSuperseded": false,
+        "kinds": [
+          "FACT"
+        ]
+      },
+      "expected": [
+        {
+          "id": "m50",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m31",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 1.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m30",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m21",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.992085
+        },
+        {
+          "id": "m20",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m13",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m12",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.16503,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m11",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.443354,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m10",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m02",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.129371,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m01",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.0,
+          "importance": 0.9,
+          "salience": 0.0
+        },
+        {
+          "id": "m91",
+          "score": 0.999996,
+          "cosine": 0.999992,
+          "relevance": 0.999996,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m90",
+          "score": 0.999996,
+          "cosine": 0.999992,
+          "relevance": 0.999996,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m03",
+          "score": 0.853553,
+          "cosine": 0.707107,
+          "relevance": 0.853553,
+          "recency": 0.406472,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m95",
+          "score": 0.639836,
+          "cosine": 0.279672,
+          "relevance": 0.639836,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.45534
+        },
+        {
+          "id": "m96",
+          "score": 0.634731,
+          "cosine": 0.269462,
+          "relevance": 0.634731,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.639151
+        },
+        {
+          "id": "ma2",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.702,
+          "salience": 0.0
+        },
+        {
+          "id": "ma1",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.701,
+          "salience": 0.0
+        },
+        {
+          "id": "ma0",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.7,
+          "salience": 0.0
+        },
+        {
+          "id": "m04",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.647398,
+          "importance": 0.5,
+          "salience": 0.0
+        }
+      ]
+    },
+    {
+      "name": "scope-owner-partition",
+      "why": "another person\u0027s conversations are excluded",
+      "query": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 0.0,
+        "importance": 0.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 20,
+      "candidateMultiplier": 2,
+      "scope": {
+        "partition": "OWNER",
+        "includeSuperseded": false,
+        "kinds": [
+          "FACT"
+        ]
+      },
+      "expected": [
+        {
+          "id": "m31",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 1.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m30",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m21",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.992085
+        },
+        {
+          "id": "m20",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m13",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m12",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.16503,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m11",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.443354,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m10",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m02",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.129371,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m01",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.0,
+          "importance": 0.9,
+          "salience": 0.0
+        },
+        {
+          "id": "m91",
+          "score": 0.999996,
+          "cosine": 0.999992,
+          "relevance": 0.999996,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m90",
+          "score": 0.999996,
+          "cosine": 0.999992,
+          "relevance": 0.999996,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m03",
+          "score": 0.853553,
+          "cosine": 0.707107,
+          "relevance": 0.853553,
+          "recency": 0.406472,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m95",
+          "score": 0.639836,
+          "cosine": 0.279672,
+          "relevance": 0.639836,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.45534
+        },
+        {
+          "id": "m96",
+          "score": 0.634731,
+          "cosine": 0.269462,
+          "relevance": 0.634731,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.639151
+        },
+        {
+          "id": "ma2",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.702,
+          "salience": 0.0
+        },
+        {
+          "id": "ma1",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.701,
+          "salience": 0.0
+        },
+        {
+          "id": "ma0",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.7,
+          "salience": 0.0
+        },
+        {
+          "id": "m04",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.647398,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m97",
+          "score": 0.469514,
+          "cosine": -0.060971,
+          "relevance": 0.469514,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 1.0
+        }
+      ]
+    },
+    {
+      "name": "scope-superseded",
+      "why": "\u0027was true until March\u0027 is returned only when asked for",
+      "query": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 0.0,
+        "importance": 0.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 20,
+      "candidateMultiplier": 2,
+      "scope": {
+        "includeSuperseded": true,
+        "kinds": [
+          "FACT"
+        ]
+      },
+      "expected": [
+        {
+          "id": "m61",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.9,
+          "salience": 0.0
+        },
+        {
+          "id": "m50",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m31",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 1.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m30",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m21",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.992085
+        },
+        {
+          "id": "m20",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m13",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m12",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.16503,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m11",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.443354,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m10",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m02",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.129371,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m01",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.0,
+          "importance": 0.9,
+          "salience": 0.0
+        },
+        {
+          "id": "m91",
+          "score": 0.999996,
+          "cosine": 0.999992,
+          "relevance": 0.999996,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m90",
+          "score": 0.999996,
+          "cosine": 0.999992,
+          "relevance": 0.999996,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m03",
+          "score": 0.853553,
+          "cosine": 0.707107,
+          "relevance": 0.853553,
+          "recency": 0.406472,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m95",
+          "score": 0.639836,
+          "cosine": 0.279672,
+          "relevance": 0.639836,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.45534
+        },
+        {
+          "id": "m96",
+          "score": 0.634731,
+          "cosine": 0.269462,
+          "relevance": 0.634731,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.639151
+        },
+        {
+          "id": "ma2",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.702,
+          "salience": 0.0
+        },
+        {
+          "id": "ma1",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.701,
+          "salience": 0.0
+        },
+        {
+          "id": "ma0",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.7,
+          "salience": 0.0
+        }
+      ]
+    },
+    {
+      "name": "scope-all-kinds",
+      "why": "no kind filter: the observation becomes reachable",
+      "query": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 0.0,
+        "importance": 0.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 20,
+      "candidateMultiplier": 2,
+      "scope": {
+        "includeSuperseded": false
+      },
+      "expected": [
+        {
+          "id": "m70",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.1,
+          "salience": 0.0
+        },
+        {
+          "id": "m50",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m31",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 1.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m30",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m21",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.992085
+        },
+        {
+          "id": "m20",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m13",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m12",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.16503,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m11",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.443354,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m10",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m02",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.129371,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m01",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.0,
+          "importance": 0.9,
+          "salience": 0.0
+        },
+        {
+          "id": "m91",
+          "score": 0.999996,
+          "cosine": 0.999992,
+          "relevance": 0.999996,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m90",
+          "score": 0.999996,
+          "cosine": 0.999992,
+          "relevance": 0.999996,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m03",
+          "score": 0.853553,
+          "cosine": 0.707107,
+          "relevance": 0.853553,
+          "recency": 0.406472,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m95",
+          "score": 0.639836,
+          "cosine": 0.279672,
+          "relevance": 0.639836,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.45534
+        },
+        {
+          "id": "m96",
+          "score": 0.634731,
+          "cosine": 0.269462,
+          "relevance": 0.634731,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.639151
+        },
+        {
+          "id": "ma2",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.702,
+          "salience": 0.0
+        },
+        {
+          "id": "ma1",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.701,
+          "salience": 0.0
+        },
+        {
+          "id": "ma0",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.7,
+          "salience": 0.0
+        }
+      ]
+    },
+    {
+      "name": "multiplier-1",
+      "why": "a narrow candidate set: the other terms never get a vote",
+      "query": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 1.0,
+        "importance": 1.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 3,
+      "candidateMultiplier": 1,
+      "scope": {
+        "includeSuperseded": false,
+        "kinds": [
+          "FACT"
+        ]
+      },
+      "expected": [
+        {
+          "id": "m10",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 0.0,
+          "recency": 1.0,
+          "importance": 0.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m01",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 0.0,
+          "recency": 0.0,
+          "importance": 1.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m02",
+          "score": 0.129371,
+          "cosine": 1.0,
+          "relevance": 0.0,
+          "recency": 0.129371,
+          "importance": 0.0,
+          "salience": 0.0
+        }
+      ]
+    },
+    {
+      "name": "multiplier-4",
+      "why": "a wide one: same k, different answer",
+      "query": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 1.0,
+        "importance": 1.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 3,
+      "candidateMultiplier": 4,
+      "scope": {
+        "includeSuperseded": false,
+        "kinds": [
+          "FACT"
+        ]
+      },
+      "expected": [
+        {
+          "id": "m13",
+          "score": 2.5,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m10",
+          "score": 2.5,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m31",
+          "score": 2.333028,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 1.0,
+          "salience": 0.0
+        }
+      ]
+    },
+    {
+      "name": "k-exceeds-candidates",
+      "why": "asking for more than exists is not an error",
+      "query": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 0.0,
+        "importance": 0.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 500,
+      "candidateMultiplier": 2,
+      "scope": {
+        "includeSuperseded": false,
+        "kinds": [
+          "FACT"
+        ]
+      },
+      "expected": [
+        {
+          "id": "m50",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m31",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 1.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m30",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m21",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.992085
+        },
+        {
+          "id": "m20",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m13",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m12",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.16503,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m11",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.443354,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m10",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m02",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.129371,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m01",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.0,
+          "importance": 0.9,
+          "salience": 0.0
+        },
+        {
+          "id": "m91",
+          "score": 0.999996,
+          "cosine": 0.999992,
+          "relevance": 0.999996,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m90",
+          "score": 0.999996,
+          "cosine": 0.999992,
+          "relevance": 0.999996,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m03",
+          "score": 0.853553,
+          "cosine": 0.707107,
+          "relevance": 0.853553,
+          "recency": 0.406472,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m95",
+          "score": 0.639836,
+          "cosine": 0.279672,
+          "relevance": 0.639836,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.45534
+        },
+        {
+          "id": "m96",
+          "score": 0.634731,
+          "cosine": 0.269462,
+          "relevance": 0.634731,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.639151
+        },
+        {
+          "id": "ma2",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.702,
+          "salience": 0.0
+        },
+        {
+          "id": "ma1",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.701,
+          "salience": 0.0
+        },
+        {
+          "id": "ma0",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.7,
+          "salience": 0.0
+        },
+        {
+          "id": "m04",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.647398,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m97",
+          "score": 0.469514,
+          "cosine": -0.060971,
+          "relevance": 0.469514,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 1.0
+        },
+        {
+          "id": "m05",
+          "score": 0.0,
+          "cosine": -1.0,
+          "relevance": 0.0,
+          "recency": 0.91835,
+          "importance": 0.5,
+          "salience": 0.0
+        }
+      ]
+    },
+    {
+      "name": "int8-rounding-halves",
+      "why": "components landing on exactly ±0.5 before rounding",
+      "query": [
+        1.0,
+        0.003937008,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 0.0,
+        "importance": 0.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 5,
+      "candidateMultiplier": 2,
+      "scope": {
+        "includeSuperseded": false,
+        "kinds": [
+          "FACT"
+        ]
+      },
+      "expected": [
+        {
+          "id": "m31",
+          "score": 0.0,
+          "cosine": 0.999992,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 1.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m30",
+          "score": 0.0,
+          "cosine": 0.999992,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 0.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m21",
+          "score": 0.0,
+          "cosine": 0.999992,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 1.0
+        },
+        {
+          "id": "m20",
+          "score": 0.0,
+          "cosine": 0.999992,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m13",
+          "score": 0.0,
+          "cosine": 0.999992,
+          "relevance": 0.0,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        }
+      ]
+    },
+    {
+      "name": "non-unit-query",
+      "why": "a query that is not unit length must be normalised first",
+      "query": [
+        3.0,
+        4.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 0.0,
+        "importance": 0.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 5,
+      "candidateMultiplier": 2,
+      "scope": {
+        "includeSuperseded": false,
+        "kinds": [
+          "FACT"
+        ]
+      },
+      "expected": [
+        {
+          "id": "m03",
+          "score": 1.0,
+          "cosine": 0.98995,
+          "relevance": 1.0,
+          "recency": 0.406472,
+          "importance": 0.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m04",
+          "score": 0.512887,
+          "cosine": 0.8,
+          "relevance": 0.512887,
+          "recency": 0.647398,
+          "importance": 0.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m21",
+          "score": 0.0,
+          "cosine": 0.6,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 0.0,
+          "salience": 1.0
+        },
+        {
+          "id": "m20",
+          "score": 0.0,
+          "cosine": 0.6,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 0.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m13",
+          "score": 0.0,
+          "cosine": 0.6,
+          "relevance": 0.0,
+          "recency": 1.0,
+          "importance": 0.0,
+          "salience": 0.0
+        }
+      ]
+    },
+    {
+      "name": "dense-vectors",
+      "why": "every component non-zero and inexact: exercises float32 rounding in unitised and accumulation order in the exact rescore",
+      "query": [
+        0.309017,
+        -0.25881904,
+        0.70710677,
+        -0.8660254,
+        0.38268343,
+        0.9238795,
+        -0.13052619,
+        0.5
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 1.0,
+        "importance": 1.0,
+        "salience": 1.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 8,
+      "candidateMultiplier": 3,
+      "scope": {
+        "includeSuperseded": false,
+        "kinds": [
+          "FACT"
+        ]
+      },
+      "expected": [
+        {
+          "id": "m21",
+          "score": 2.43334,
+          "cosine": 0.188779,
+          "relevance": 0.608227,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.992085
+        },
+        {
+          "id": "m97",
+          "score": 2.378616,
+          "cosine": 0.149896,
+          "relevance": 0.545588,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 1.0
+        },
+        {
+          "id": "m13",
+          "score": 2.108227,
+          "cosine": 0.188779,
+          "relevance": 0.608227,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m10",
+          "score": 2.108227,
+          "cosine": 0.188779,
+          "relevance": 0.608227,
+          "recency": 1.0,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m96",
+          "score": 2.095691,
+          "cosine": 0.198267,
+          "relevance": 0.623512,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.639151
+        },
+        {
+          "id": "ma2",
+          "score": 2.035028,
+          "cosine": 0.431973,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.702,
+          "salience": 0.0
+        },
+        {
+          "id": "ma1",
+          "score": 2.034028,
+          "cosine": 0.431973,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.701,
+          "salience": 0.0
+        },
+        {
+          "id": "ma0",
+          "score": 2.033028,
+          "cosine": 0.431973,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.7,
+          "salience": 0.0
+        }
+      ]
+    },
+    {
+      "name": "dense-vectors-relevance-only",
+      "why": "the same vectors under plain cosine, where nothing masks a precision drift",
+      "query": [
+        0.309017,
+        -0.25881904,
+        0.70710677,
+        -0.8660254,
+        0.38268343,
+        0.9238795,
+        -0.13052619,
+        0.5
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 0.0,
+        "importance": 0.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 8,
+      "candidateMultiplier": 3,
+      "scope": {
+        "includeSuperseded": false,
+        "kinds": [
+          "FACT"
+        ]
+      },
+      "expected": [
+        {
+          "id": "ma2",
+          "score": 1.0,
+          "cosine": 0.431973,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.702,
+          "salience": 0.0
+        },
+        {
+          "id": "ma1",
+          "score": 1.0,
+          "cosine": 0.431973,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.701,
+          "salience": 0.0
+        },
+        {
+          "id": "ma0",
+          "score": 1.0,
+          "cosine": 0.431973,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.7,
+          "salience": 0.0
+        },
+        {
+          "id": "m95",
+          "score": 0.625683,
+          "cosine": 0.199615,
+          "relevance": 0.625683,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.45534
+        },
+        {
+          "id": "m96",
+          "score": 0.623512,
+          "cosine": 0.198267,
+          "relevance": 0.623512,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.639151
+        },
+        {
+          "id": "m91",
+          "score": 0.609228,
+          "cosine": 0.1894,
+          "relevance": 0.609228,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m50",
+          "score": 0.608227,
+          "cosine": 0.188779,
+          "relevance": 0.608227,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m31",
+          "score": 0.608227,
+          "cosine": 0.188779,
+          "relevance": 0.608227,
+          "recency": 0.333028,
+          "importance": 1.0,
+          "salience": 0.0
+        }
+      ]
+    },
+    {
+      "name": "narrow-importance-spread",
+      "why": "importance is float in Java and double in JS; min-max amplifies the gap by 1/(hi-lo) and this spread is small enough for it to matter",
+      "query": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 0.0,
+        "importance": 1.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 3,
+      "candidateMultiplier": 1,
+      "scope": {
+        "includeSuperseded": false,
+        "kinds": [
+          "FACT"
+        ]
+      },
+      "expected": [
+        {
+          "id": "ma2",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 0.0,
+          "recency": 0.0,
+          "importance": 1.0,
+          "salience": 0.0
+        },
+        {
+          "id": "ma1",
+          "score": 0.499985,
+          "cosine": 1.0,
+          "relevance": 0.0,
+          "recency": 0.0,
+          "importance": 0.499985,
+          "salience": 0.0
+        },
+        {
+          "id": "ma0",
+          "score": 0.0,
+          "cosine": 1.0,
+          "relevance": 0.0,
+          "recency": 0.0,
+          "importance": 0.0,
+          "salience": 0.0
+        }
+      ]
+    },
+    {
+      "name": "empty-result",
+      "why": "a scope admitting nothing returns nothing, not an error",
+      "query": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 0.0,
+        "importance": 0.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 10,
+      "candidateMultiplier": 2,
+      "scope": {
+        "companionId": "nobody",
+        "includeSuperseded": false,
+        "kinds": [
+          "REFLECTION"
+        ]
+      },
+      "expected": []
+    }
+  ]
+}

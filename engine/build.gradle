@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.neovetta.aicompanion'
+version = '0.1.0-SNAPSHOT'
+
+application {
+    mainClass = 'com.neovetta.aicompanion.memory.CorpusValidator'
+}
+
+// The corpus validator is what `run` means; retrieval is a second entry point over the same
+// classes. A separate task rather than a second application block so `run` keeps its meaning.
+tasks.register('retrieve', JavaExec) {
+    group = 'application'
+    description = 'Score a batch of pre-embedded queries against the corpus'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.neovetta.aicompanion.memory.Retrieve'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Gson, not Jackson: the mod already uses Gson (CompanionConfig, SkinProfileResolver),
+    // and this package is meant to drop into it unchanged.
+    implementation 'com.google.code.gson:gson:2.11.0'
+
+    testImplementation platform('org.junit:junit-bom:5.10.2')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+// Java 17, matching ../ai-companion-mod/aicompanion/build.gradle (options.release = 17).
+// This code ships inside the mod; building it against a newer release would compile here
+// and fail there. Records and sealed types are available; pattern-matching switch is not.
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 17
+    options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events 'passed', 'failed', 'skipped'
+        exceptionFormat 'full'
+    }
+}
+
+// Regenerates the cross-language fixture. Both implementations are pinned to its output, so
+// running this is a deliberate act: it moves the goalposts for the JS side too.
+tasks.register('fixture', JavaExec) {
+    group = 'application'
+    description = 'Regenerate the cross-language test fixture in ../fixture'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.neovetta.aicompanion.memory.GenerateFixture'
+}

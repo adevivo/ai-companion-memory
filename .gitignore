@@ -1,0 +1,41 @@
+# ---------------------------------------------------------------------------
+# TIER 1 PRIVACY CONSTRAINT — read before editing.
+#
+# This repository must NEVER contain conversation data. The corpus that every
+# measurement behind this code was made against lives in ai-companion-memory-poc
+# and does not leave that machine. These rules are here BEFORE any such file
+# could exist, on purpose, so that copying one in fails silently-safe rather
+# than committing it.
+#
+# The test fixture is deliberately named memories.jsonl / embeddings.* so it
+# cannot collide with these patterns. Do not rename it into them, and do not
+# add exceptions here to make a corpus file trackable.
+# ---------------------------------------------------------------------------
+
+corpus/
+records.jsonl
+turns.jsonl
+vectors.f32
+vectors.i8
+manifest.json
+curation.jsonl
+labels.jsonl
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+
+# --- build output ---
+build/
+.gradle/
+out/
+node_modules/
+*.class
+*.jar
+!engine/gradle/wrapper/gradle-wrapper.jar
+
+# --- editor / OS ---
+.DS_Store
+.idea/
+*.iml
+.vscode/

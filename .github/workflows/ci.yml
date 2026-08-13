@@ -1,0 +1,56 @@
+# Both implementations, every push. The point is not that each one passes its own tests — it is
+# that both reproduce fixture/ exactly. A change to the scorer that only lands on one side turns
+# this red, which is the only automated signal that the cross-language contract has broken.
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  java:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          # 17 to match ai-companion-mod. This package ships inside the mod; building it against a
+          # newer release would compile here and fail there.
+          java-version: '17'
+      - run: ./gradlew test
+        working-directory: engine
+
+  js:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      # No install step: the package has zero dependencies, deliberately. It runs in a browser
+      # holding decrypted memories, and every transitive dependency is a party to that.
+      - run: npm test
+        working-directory: js
+
+  fixture-is-current:
+    # Guards the failure mode the two jobs above cannot see: someone edits the scorer, regenerates
+    # the fixture to make Java green, and never runs the JS suite. Regenerating must not change
+    # anything on a healthy branch.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - run: ./gradlew -q fixture
+        working-directory: engine
+      - name: fixture must be unchanged
+        run: |
+          if ! git diff --quiet -- fixture/; then
+            echo "::error::Regenerating the fixture changed it — engine/ and fixture/ are out of step."
+            echo "Run 'cd engine && ./gradlew -q fixture', then run BOTH suites and commit the result."
+            git --no-pager diff --stat -- fixture/
+            exit 1
+          fi
