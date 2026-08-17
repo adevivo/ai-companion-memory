@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.neovetta.aicompanion'
-version = '0.1.0-SNAPSHOT'
+version = '0.2.0'
 
 application {
     mainClass = 'com.neovetta.aicompanion.memory.CorpusValidator'
