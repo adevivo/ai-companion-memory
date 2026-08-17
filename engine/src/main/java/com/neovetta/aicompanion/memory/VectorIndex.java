@@ -127,6 +127,35 @@ public final class VectorIndex {
       return new VectorIndex(count, dim, i8, f32);
    }
 
+   /**
+    * Writes the sidecars {@link #load(Path)} reads: {@code manifest.json}, {@code vectors.i8} and
+    * {@code vectors.f32}.
+    *
+    * <p>The eval harness got its corpus from a Python pipeline, so nothing here ever needed to
+    * write one. Production does: the mod holds a player's memories in memory, gains one, and has to
+    * put the result somewhere that survives a restart. Without this, persisting a corpus means
+    * re-embedding it on every load — the one cost the packed format exists to avoid.
+    *
+    * <p>Writes are not atomic. A crash midway leaves a torn corpus, which {@link #load(Path)} will
+    * reject on the size check rather than read as valid — noisy, but not silently wrong. A caller
+    * that cares should write to a temporary directory and move it into place.
+    */
+   public void save(Path dir) throws IOException {
+      Files.createDirectories(dir);
+      Files.writeString(dir.resolve("manifest.json"),
+            "{\"count\":" + count + ",\"dim\":" + dim + "}", StandardCharsets.UTF_8);
+      Files.write(dir.resolve("vectors.i8"), i8);
+
+      ByteBuffer buf = ByteBuffer.allocate(f32.length * 4).order(ByteOrder.LITTLE_ENDIAN);
+      // Little-endian by contract, and written through a buffer rather than a stream so the byte
+      // order is stated rather than inherited from the platform. JS reads these through a DataView
+      // for the same reason.
+      for (float v : f32) {
+         buf.putFloat(v);
+      }
+      Files.write(dir.resolve("vectors.f32"), buf.array());
+   }
+
    public int count() {
       return count;
    }

@@ -68,6 +68,36 @@ class VectorIndexTest {
       }
    }
 
+   @Test
+   @DisplayName("save() writes what load() reads, round-tripping exactly")
+   void saveRoundTrips(@TempDir Path dir) throws IOException {
+      // The production loop: build in memory, persist, come back after a restart. If this drifts,
+      // a player's memories survive a restart as vectors that no longer describe them.
+      VectorIndex built = VectorIndex.of(List.of(A, B, C));
+      built.save(dir);
+      VectorIndex reloaded = VectorIndex.load(dir);
+
+      assertEquals(built.count(), reloaded.count());
+      assertEquals(built.dim(), reloaded.dim());
+      for (float[] probe : List.of(A, B, C)) {
+         float[] unit = VectorIndex.unitised(probe);
+         for (int row = 0; row < built.count(); row++) {
+            assertEquals(built.cosine(row, unit), reloaded.cosine(row, unit), 0.0,
+                  "row " + row + " changed across save/load");
+         }
+      }
+   }
+
+   @Test
+   @DisplayName("save() creates the directory it is given")
+   void saveCreatesDir(@TempDir Path dir) throws IOException {
+      Path nested = dir.resolve("player").resolve("memories");
+      VectorIndex.of(List.of(A)).save(nested);
+      assertTrue(java.nio.file.Files.exists(nested.resolve("manifest.json")));
+      assertTrue(java.nio.file.Files.exists(nested.resolve("vectors.i8")));
+      assertTrue(java.nio.file.Files.exists(nested.resolve("vectors.f32")));
+   }
+
    /**
     * The claim {@code of()}'s javadoc makes, and the one that matters: an index built in memory and
     * an index loaded from the packed sidecars are the same index. If this drifts, the evaluation
