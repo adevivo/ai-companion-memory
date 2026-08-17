@@ -156,6 +156,23 @@ public final class VectorIndex {
       Files.write(dir.resolve("vectors.f32"), buf.array());
    }
 
+   /**
+    * One row's float32 vector, unit-normalised as stored.
+    *
+    * <p>The index can score a row against a query but could not hand the row back, which is fine
+    * for an eval harness that only ever reads a corpus. A store that <em>grows</em> one needs it:
+    * appending a memory rebuilds the packed arrays, and re-deriving the existing vectors any other
+    * way means re-embedding text that was already embedded.
+    */
+   public float[] row(int index) {
+      if (index < 0 || index >= count) {
+         throw new IndexOutOfBoundsException("row " + index + " of " + count);
+      }
+      float[] out = new float[dim];
+      System.arraycopy(f32, index * dim, out, 0, dim);
+      return out;
+   }
+
    public int count() {
       return count;
    }

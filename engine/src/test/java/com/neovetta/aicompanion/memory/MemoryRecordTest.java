@@ -97,6 +97,27 @@ class MemoryRecordTest {
       }
 
       @Test
+      @DisplayName("withPlace fills in a location learned later, and keeps everything else")
+      void withPlaceKeepsTheRest() {
+         MemoryRecord placeless = base().inWorld("world-a").build();
+         assertEquals(null, placeless.place());
+         MemoryRecord located = placeless.withPlace(new Place("minecraft:overworld", 219, 80, 22));
+         assertEquals(219, located.place().x());
+         assertEquals("world-a", located.worldId());
+         assertEquals(MemoryScope.WORLD, located.scope());
+         assertEquals(placeless.id(), located.id());
+         assertEquals(placeless.occurrences(), located.occurrences());
+      }
+
+      @Test
+      @DisplayName("withPlace refuses a person-scoped memory, like the constructor does")
+      void withPlaceRejectsPerson() {
+         assertThrows(IllegalArgumentException.class,
+               () -> base().aboutPerson().build()
+                     .withPlace(new Place("minecraft:overworld", 1, 2, 3)));
+      }
+
+      @Test
       @DisplayName("a dimension is required, because (0,64,0) is two different places")
       void dimensionRequired() {
          assertThrows(NullPointerException.class, () -> new Place(null, 0, 0, 0));

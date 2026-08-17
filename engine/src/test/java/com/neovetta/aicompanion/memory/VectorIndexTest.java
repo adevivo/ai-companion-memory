@@ -89,6 +89,24 @@ class VectorIndexTest {
    }
 
    @Test
+   @DisplayName("row() returns the stored vector, so a store can rebuild without re-embedding")
+   void rowRoundTrips() {
+      VectorIndex idx = VectorIndex.of(List.of(A, B, C));
+      // Rebuilding an index from its own rows must produce an identical index — that is the append
+      // path: read what is held, add one, repack.
+      VectorIndex rebuilt = VectorIndex.of(
+            List.of(idx.row(0), idx.row(1), idx.row(2)));
+      for (float[] probe : List.of(A, B, C)) {
+         float[] unit = VectorIndex.unitised(probe);
+         for (int r = 0; r < 3; r++) {
+            assertEquals(idx.cosine(r, unit), rebuilt.cosine(r, unit), 0.0, "row " + r);
+         }
+      }
+      assertThrows(IndexOutOfBoundsException.class, () -> idx.row(3));
+      assertThrows(IndexOutOfBoundsException.class, () -> idx.row(-1));
+   }
+
+   @Test
    @DisplayName("save() creates the directory it is given")
    void saveCreatesDir(@TempDir Path dir) throws IOException {
       Path nested = dir.resolve("player").resolve("memories");

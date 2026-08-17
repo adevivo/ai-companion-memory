@@ -261,6 +261,22 @@ public record MemoryRecord(
    }
 
    /** Copy carrying a row index into the packed vector sidecars. */
+   /**
+    * The same memory, now knowing where it happened.
+    *
+    * <p>For the case where a fact is already held without a location and is restated with one — a
+    * confirmation that carries new information. Discarding the location there loses the only part
+    * of the restatement that was worth anything.
+    *
+    * @throws IllegalArgumentException if this memory is not {@link MemoryScope#WORLD}-scoped
+    */
+   public MemoryRecord withPlace(Place newPlace) {
+      return new MemoryRecord(id, serial, text, entity, value, occurrences, topicDays, lastSeenAt,
+            kind, validFrom, validTo, recordedAt, invalidatedAt, importance, importanceSource,
+            context, partition, frame, companionId, provenance, scope, worldId, newPlace,
+            vectorRow);
+   }
+
    public MemoryRecord withVectorRow(int row) {
       return new MemoryRecord(id, serial, text, entity, value, occurrences, topicDays, lastSeenAt, kind,
             validFrom, validTo, recordedAt, invalidatedAt, importance, importanceSource, context,
