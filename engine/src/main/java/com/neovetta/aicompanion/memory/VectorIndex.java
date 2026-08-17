@@ -78,6 +78,55 @@ public final class VectorIndex {
       return new VectorIndex(count, dim, i8, f32);
    }
 
+   /**
+    * Builds an index from vectors already in memory, in row order.
+    *
+    * <p><b>This is the production path, and {@link #load(Path)} is the eval one.</b> Nothing in the
+    * shipped design ever reads a vector off disk in this format: the mod decrypts records into
+    * memory and scores over them, so the bytes arrive as {@code float[]} from an embedder or a
+    * decrypted blob, never as a packed sidecar. The sidecars exist so the evaluation harness can
+    * replay a fixed corpus.
+    *
+    * <p>Reproduces exactly what {@code embed.py} writes and {@link #load(Path)} then reads —
+    * unit-normalise, keep float32 for the rescore, quantise to int8 for the scan — so an index built
+    * here and an index loaded from disk rank identically for the same inputs. That equivalence is
+    * what lets the eval harness stand in for production at all, and it is pinned by a test.
+    *
+    * <p>The JS side has always been able to do this: its constructor is public and takes the two
+    * typed arrays directly. Java's is package-private, so without this a caller outside the package
+    * had to write files to score anything. Same capability, both languages.
+    *
+    * @param vectors one embedding per row; each is unitised here, so callers need not
+    * @throws IllegalArgumentException if empty, or if the rows are not all the same width
+    */
+   public static VectorIndex of(java.util.List<float[]> vectors) {
+      if (vectors == null || vectors.isEmpty()) {
+         throw new IllegalArgumentException("Refusing to build an empty index.");
+      }
+      int count = vectors.size();
+      int dim = vectors.get(0).length;
+      if (dim == 0) {
+         throw new IllegalArgumentException("Refusing to build a zero-dimension index.");
+      }
+
+      byte[] i8 = new byte[count * dim];
+      float[] f32 = new float[count * dim];
+      for (int row = 0; row < count; row++) {
+         float[] v = vectors.get(row);
+         if (v.length != dim) {
+            // A ragged index would score fine for a while and then read across a row boundary.
+            throw new IllegalArgumentException("Row " + row + " has " + v.length
+                  + " dimensions, row 0 has " + dim + " — every vector must come from the same"
+                  + " embedding model.");
+         }
+         float[] unit = unitised(v);
+         byte[] q = quantise(unit);
+         System.arraycopy(unit, 0, f32, row * dim, dim);
+         System.arraycopy(q, 0, i8, row * dim, dim);
+      }
+      return new VectorIndex(count, dim, i8, f32);
+   }
+
    public int count() {
       return count;
    }
