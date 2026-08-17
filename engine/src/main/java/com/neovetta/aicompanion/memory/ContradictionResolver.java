@@ -113,7 +113,9 @@ public final class ContradictionResolver {
             Math.max(topicTotal, best.topicDays()), seen, best.kind(), best.validFrom(),
             best.validTo(), best.recordedAt(), best.invalidatedAt(), best.importance(),
             best.importanceSource(), best.context(), best.partition(), best.frame(),
-            best.companionId(), best.provenance(), best.vectorRow()));
+            best.companionId(), best.provenance(),
+            // Folding occurrences never changes which world a claim is about.
+            best.scope(), best.worldId(), best.place(), best.vectorRow()));
    }
 
    /**

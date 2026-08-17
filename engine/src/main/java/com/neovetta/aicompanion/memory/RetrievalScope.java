@@ -39,41 +39,63 @@ import java.util.Set;
  * </ul>
  *
  * @param companionId who is speaking; null admits only companion-agnostic memories
+ * @param worldId which save the asker is in; null admits only {@link MemoryScope#PERSON} memories
  * @param partition restrict to one partition, or null for all
  * @param includeSuperseded whether records whose valid time has closed are still eligible
  * @param kinds which kinds are eligible; null or empty for all
  */
-public record RetrievalScope(String companionId, Partition partition, boolean includeSuperseded,
-      Set<MemoryKind> kinds) {
+public record RetrievalScope(String companionId, String worldId, Partition partition,
+      boolean includeSuperseded, Set<MemoryKind> kinds) {
 
    public RetrievalScope {
       kinds = kinds == null || kinds.isEmpty() ? null : Set.copyOf(kinds);
    }
 
+   public RetrievalScope(String companionId, Partition partition, boolean includeSuperseded,
+         Set<MemoryKind> kinds) {
+      this(companionId, null, partition, includeSuperseded, kinds);
+   }
+
    public RetrievalScope(String companionId, Partition partition, boolean includeSuperseded) {
-      this(companionId, partition, includeSuperseded, null);
+      this(companionId, null, partition, includeSuperseded, null);
    }
 
    /** Everything a companion-agnostic caller may see: no companion, both partitions, current only. */
    public static RetrievalScope everything() {
-      return new RetrievalScope(null, null, false, null);
+      return new RetrievalScope(null, null, null, false, null);
    }
 
    /** What one companion may see, across partitions, current only. */
    public static RetrievalScope forCompanion(String companionId) {
-      return new RetrievalScope(Objects.requireNonNull(companionId), null, false, null);
+      return new RetrievalScope(Objects.requireNonNull(companionId), null, null, false, null);
+   }
+
+   /**
+    * What one companion may see while playing one save — the production case.
+    *
+    * <p>Both arguments are required. A companion asking from inside a world and not saying which
+    * world is the shape of every cross-save leak this scoping exists to prevent.
+    */
+   public static RetrievalScope forCompanionInWorld(String companionId, String worldId) {
+      return new RetrievalScope(Objects.requireNonNull(companionId, "companionId"),
+            Objects.requireNonNull(worldId, "worldId"), null, false, null);
+   }
+
+   /** The same scope, bound to a save. */
+   public RetrievalScope inWorld(String id) {
+      return new RetrievalScope(companionId, id, partition, includeSuperseded, kinds);
    }
 
    public RetrievalScope withPartition(Partition p) {
-      return new RetrievalScope(companionId, p, includeSuperseded, kinds);
+      return new RetrievalScope(companionId, worldId, p, includeSuperseded, kinds);
    }
 
    public RetrievalScope withSuperseded(boolean include) {
-      return new RetrievalScope(companionId, partition, include, kinds);
+      return new RetrievalScope(companionId, worldId, partition, include, kinds);
    }
 
    public RetrievalScope withKinds(Set<MemoryKind> k) {
-      return new RetrievalScope(companionId, partition, includeSuperseded, k);
+      return new RetrievalScope(companionId, worldId, partition, includeSuperseded, k);
    }
 
    /** Whether this memory is visible to the asker at all. */
@@ -88,6 +110,14 @@ public record RetrievalScope(String companionId, Partition partition, boolean in
          return false;
       }
       if (kinds != null && !kinds.contains(r.kind())) {
+         return false;
+      }
+      // A world-scoped memory is reachable only from the save it belongs to. A HARD FILTER, not a
+      // weight, for the same reason IN_WORLD is one: a memory from another save reads exactly like
+      // a valid one, so ranking it low leaves a failure with no symptom. A null asker worldId --
+      // the browser, where there is no world -- admits person-scoped memories only, mirroring how
+      // a null companionId admits only companion-agnostic ones.
+      if (r.scope() == MemoryScope.WORLD && !r.worldId().equals(worldId)) {
          return false;
       }
       // Covers IN_WORLD implicitly: the record constructor guarantees such memories carry a

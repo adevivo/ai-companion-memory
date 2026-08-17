@@ -104,6 +104,7 @@ public final class GenerateFixture {
          o.addProperty("candidateMultiplier", c.multiplier());
          JsonObject s = new JsonObject();
          s.addProperty("companionId", c.scope().companionId());
+         s.addProperty("worldId", c.scope().worldId());
          s.addProperty("partition",
                c.scope().partition() == null ? null : c.scope().partition().name());
          s.addProperty("includeSuperseded", c.scope().includeSuperseded());
@@ -264,6 +265,24 @@ public final class GenerateFixture {
             raw(0, 0, 1, 0, 0, 0, 0, 0));
       add(records, vectors, b("ma2", 202, "narrow importance c", 0.702f, 1, days(120)),
             raw(0, 0, 1, 0, 0, 0, 0, 0));
+
+      // --- world scoping -------------------------------------------------------------------
+      //
+      // Three memories on one shared direction (dim 3): one belonging to each of two saves, and
+      // one about the player themselves. A query pointing there reaches all three, so what comes
+      // back is decided purely by the asker's world -- which is the whole point. Without the
+      // filter a caller in "world-a" would see world-b's memory ranked identically, and nothing
+      // about the result would look wrong.
+      add(records, vectors, b("mw0", 300, "world a fact", 0.5f, 1, days(120))
+            .inWorld("world-a"), raw(0, 0, 0, 1, 0, 0, 0, 0));
+      add(records, vectors, b("mw1", 301, "world b fact", 0.5f, 1, days(120))
+            .inWorld("world-b"), raw(0, 0, 0, 1, 0, 0, 0, 0));
+      add(records, vectors, b("mw2", 302, "person fact", 0.5f, 1, days(120)),
+            raw(0, 0, 0, 1, 0, 0, 0, 0));
+      // A located memory: same world as mw0, and carries the coordinates that text alone cannot.
+      add(records, vectors, b("mw3", 303, "world a bridge", 0.5f, 1, days(120))
+            .inWorld("world-a").place(new Place("minecraft:overworld", 218, 79, 23)),
+            raw(0, 0, 0, 1, 0, 0, 0, 0));
    }
 
    private static List<Case> cases() {
@@ -351,7 +370,22 @@ public final class GenerateFixture {
             new Case("empty-result", "a scope admitting nothing returns nothing, not an error",
                   east, MemoryScorer.Weights.MEASURED, MemoryScorer.DEFAULT_HALF_LIFE_HOURS,
                   10, 2, RetrievalScope.forCompanion("nobody")
-                        .withKinds(EnumSet.of(MemoryKind.REFLECTION))));
+                        .withKinds(EnumSet.of(MemoryKind.REFLECTION))),
+            new Case("world-scope-a",
+                  "a caller in world-a sees world-a's memories and the player's, never world-b's",
+                  raw(0, 0, 0, 1, 0, 0, 0, 0), MemoryScorer.Weights.MEASURED,
+                  MemoryScorer.DEFAULT_HALF_LIFE_HOURS, 10, 2,
+                  RetrievalScope.forCompanionInWorld("vetta", "world-a")),
+            new Case("world-scope-b",
+                  "the same query from world-b returns a disjoint set of world memories",
+                  raw(0, 0, 0, 1, 0, 0, 0, 0), MemoryScorer.Weights.MEASURED,
+                  MemoryScorer.DEFAULT_HALF_LIFE_HOURS, 10, 2,
+                  RetrievalScope.forCompanionInWorld("vetta", "world-b")),
+            new Case("world-scope-none",
+                  "no world -- the browser -- reaches person memories only, never a save's",
+                  raw(0, 0, 0, 1, 0, 0, 0, 0), MemoryScorer.Weights.MEASURED,
+                  MemoryScorer.DEFAULT_HALF_LIFE_HOURS, 10, 2,
+                  RetrievalScope.forCompanion("vetta")));
    }
 
    // --- helpers ----------------------------------------------------------------------------
@@ -366,6 +400,9 @@ public final class GenerateFixture {
             .occurrences(1).topicDays(topicDays)
             .importance(importance).importanceSource(ImportanceSource.EXTRACTION)
             .context(MemoryContext.CHAT).partition(Partition.OWNER).frame(MemoryFrame.REAL)
+            // Person-scoped unless a case says otherwise: every pre-existing fixture record is a
+            // claim about the player with no world attached, which is exactly PERSON.
+            .aboutPerson()
             .provenance(new Provenance("fixture", "chat-" + id, "turn-" + id,
                   EPOCH_START.toEpochMilli()));
    }

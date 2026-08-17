@@ -1,7 +1,7 @@
 {
   "comment": "Cross-language fixture. Synthetic — contains no corpus data. Regenerate with `./gradlew -q fixture`; both implementations must reproduce it.",
-  "count": 28,
-  "vectorCount": 27,
+  "count": 32,
+  "vectorCount": 31,
   "dim": 8,
   "nowMillis": 1786579200000,
   "scorePrecision": 6,
@@ -830,6 +830,15 @@
           "salience": 0.639151
         },
         {
+          "id": "mw2",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
           "id": "ma2",
           "score": 0.5,
           "cosine": 0.0,
@@ -845,15 +854,6 @@
           "relevance": 0.5,
           "recency": 0.333028,
           "importance": 0.701,
-          "salience": 0.0
-        },
-        {
-          "id": "ma0",
-          "score": 0.5,
-          "cosine": 0.0,
-          "relevance": 0.5,
-          "recency": 0.333028,
-          "importance": 0.7,
           "salience": 0.0
         }
       ]
@@ -1032,6 +1032,15 @@
           "salience": 0.639151
         },
         {
+          "id": "mw2",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
           "id": "ma2",
           "score": 0.5,
           "cosine": 0.0,
@@ -1056,15 +1065,6 @@
           "relevance": 0.5,
           "recency": 0.333028,
           "importance": 0.7,
-          "salience": 0.0
-        },
-        {
-          "id": "m04",
-          "score": 0.5,
-          "cosine": 0.0,
-          "relevance": 0.5,
-          "recency": 0.647398,
-          "importance": 0.5,
           "salience": 0.0
         }
       ]
@@ -1235,6 +1235,15 @@
           "salience": 0.639151
         },
         {
+          "id": "mw2",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
           "id": "ma2",
           "score": 0.5,
           "cosine": 0.0,
@@ -1269,15 +1278,6 @@
           "recency": 0.647398,
           "importance": 0.5,
           "salience": 0.0
-        },
-        {
-          "id": "m97",
-          "score": 0.469514,
-          "cosine": -0.060971,
-          "relevance": 0.469514,
-          "recency": 0.333028,
-          "importance": 0.5,
-          "salience": 1.0
         }
       ]
     },
@@ -1464,6 +1464,15 @@
           "salience": 0.639151
         },
         {
+          "id": "mw2",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
           "id": "ma2",
           "score": 0.5,
           "cosine": 0.0,
@@ -1479,15 +1488,6 @@
           "relevance": 0.5,
           "recency": 0.333028,
           "importance": 0.701,
-          "salience": 0.0
-        },
-        {
-          "id": "ma0",
-          "score": 0.5,
-          "cosine": 0.0,
-          "relevance": 0.5,
-          "recency": 0.333028,
-          "importance": 0.7,
           "salience": 0.0
         }
       ]
@@ -1672,6 +1672,15 @@
           "salience": 0.639151
         },
         {
+          "id": "mw2",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
           "id": "ma2",
           "score": 0.5,
           "cosine": 0.0,
@@ -1687,15 +1696,6 @@
           "relevance": 0.5,
           "recency": 0.333028,
           "importance": 0.701,
-          "salience": 0.0
-        },
-        {
-          "id": "ma0",
-          "score": 0.5,
-          "cosine": 0.0,
-          "relevance": 0.5,
-          "recency": 0.333028,
-          "importance": 0.7,
           "salience": 0.0
         }
       ]
@@ -1990,6 +1990,15 @@
           "salience": 0.639151
         },
         {
+          "id": "mw2",
+          "score": 0.5,
+          "cosine": 0.0,
+          "relevance": 0.5,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
           "id": "ma2",
           "score": 0.5,
           "cosine": 0.0,
@@ -2228,48 +2237,66 @@
       "expected": [
         {
           "id": "m21",
-          "score": 2.43334,
+          "score": 2.572057,
           "cosine": 0.188779,
-          "relevance": 0.608227,
+          "relevance": 0.746945,
           "recency": 0.333028,
           "importance": 0.5,
           "salience": 0.992085
         },
         {
           "id": "m97",
-          "score": 2.378616,
+          "score": 2.539512,
           "cosine": 0.149896,
-          "relevance": 0.545588,
+          "relevance": 0.706484,
           "recency": 0.333028,
           "importance": 0.5,
           "salience": 1.0
         },
         {
           "id": "m13",
-          "score": 2.108227,
+          "score": 2.246945,
           "cosine": 0.188779,
-          "relevance": 0.608227,
+          "relevance": 0.746945,
           "recency": 1.0,
           "importance": 0.5,
           "salience": 0.0
         },
         {
           "id": "m10",
-          "score": 2.108227,
+          "score": 2.246945,
           "cosine": 0.188779,
-          "relevance": 0.608227,
+          "relevance": 0.746945,
           "recency": 1.0,
           "importance": 0.5,
           "salience": 0.0
         },
         {
           "id": "m96",
-          "score": 2.095691,
+          "score": 2.228996,
           "cosine": 0.198267,
-          "relevance": 0.623512,
+          "relevance": 0.756817,
           "recency": 0.333028,
           "importance": 0.5,
           "salience": 0.639151
+        },
+        {
+          "id": "m31",
+          "score": 2.079972,
+          "cosine": 0.188779,
+          "relevance": 0.746945,
+          "recency": 0.333028,
+          "importance": 1.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m95",
+          "score": 2.046588,
+          "cosine": 0.199615,
+          "relevance": 0.75822,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.45534
         },
         {
           "id": "ma2",
@@ -2278,24 +2305,6 @@
           "relevance": 1.0,
           "recency": 0.333028,
           "importance": 0.702,
-          "salience": 0.0
-        },
-        {
-          "id": "ma1",
-          "score": 2.034028,
-          "cosine": 0.431973,
-          "relevance": 1.0,
-          "recency": 0.333028,
-          "importance": 0.701,
-          "salience": 0.0
-        },
-        {
-          "id": "ma0",
-          "score": 2.033028,
-          "cosine": 0.431973,
-          "relevance": 1.0,
-          "recency": 0.333028,
-          "importance": 0.7,
           "salience": 0.0
         }
       ]
@@ -2358,45 +2367,45 @@
         },
         {
           "id": "m95",
-          "score": 0.625683,
+          "score": 0.75822,
           "cosine": 0.199615,
-          "relevance": 0.625683,
+          "relevance": 0.75822,
           "recency": 0.333028,
           "importance": 0.5,
           "salience": 0.45534
         },
         {
           "id": "m96",
-          "score": 0.623512,
+          "score": 0.756817,
           "cosine": 0.198267,
-          "relevance": 0.623512,
+          "relevance": 0.756817,
           "recency": 0.333028,
           "importance": 0.5,
           "salience": 0.639151
         },
         {
           "id": "m91",
-          "score": 0.609228,
+          "score": 0.747591,
           "cosine": 0.1894,
-          "relevance": 0.609228,
+          "relevance": 0.747591,
           "recency": 0.333028,
           "importance": 0.5,
           "salience": 0.0
         },
         {
           "id": "m50",
-          "score": 0.608227,
+          "score": 0.746945,
           "cosine": 0.188779,
-          "relevance": 0.608227,
+          "relevance": 0.746945,
           "recency": 0.333028,
           "importance": 0.5,
           "salience": 0.0
         },
         {
           "id": "m31",
-          "score": 0.608227,
+          "score": 0.746945,
           "cosine": 0.188779,
-          "relevance": 0.608227,
+          "relevance": 0.746945,
           "recency": 0.333028,
           "importance": 1.0,
           "salience": 0.0
@@ -2491,6 +2500,365 @@
         ]
       },
       "expected": []
+    },
+    {
+      "name": "world-scope-a",
+      "why": "a caller in world-a sees world-a\u0027s memories and the player\u0027s, never world-b\u0027s",
+      "query": [
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 0.0,
+        "importance": 0.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 10,
+      "candidateMultiplier": 2,
+      "scope": {
+        "companionId": "vetta",
+        "worldId": "world-a",
+        "includeSuperseded": false
+      },
+      "expected": [
+        {
+          "id": "mw3",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "mw2",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "mw0",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m95",
+          "score": 0.125896,
+          "cosine": 0.125896,
+          "relevance": 0.125896,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.458973
+        },
+        {
+          "id": "m96",
+          "score": 0.125749,
+          "cosine": 0.125749,
+          "relevance": 0.125749,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.64425
+        },
+        {
+          "id": "m70",
+          "score": 0.0,
+          "cosine": 0.0,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 0.1,
+          "salience": 0.0
+        },
+        {
+          "id": "m50",
+          "score": 0.0,
+          "cosine": 0.0,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m31",
+          "score": 0.0,
+          "cosine": 0.0,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 1.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m30",
+          "score": 0.0,
+          "cosine": 0.0,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 0.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m21",
+          "score": 0.0,
+          "cosine": 0.0,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 1.0
+        }
+      ]
+    },
+    {
+      "name": "world-scope-b",
+      "why": "the same query from world-b returns a disjoint set of world memories",
+      "query": [
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 0.0,
+        "importance": 0.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 10,
+      "candidateMultiplier": 2,
+      "scope": {
+        "companionId": "vetta",
+        "worldId": "world-b",
+        "includeSuperseded": false
+      },
+      "expected": [
+        {
+          "id": "mw2",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "mw1",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m95",
+          "score": 0.125896,
+          "cosine": 0.125896,
+          "relevance": 0.125896,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.458973
+        },
+        {
+          "id": "m96",
+          "score": 0.125749,
+          "cosine": 0.125749,
+          "relevance": 0.125749,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.64425
+        },
+        {
+          "id": "m90",
+          "score": 0.0,
+          "cosine": 0.0,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m70",
+          "score": 0.0,
+          "cosine": 0.0,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 0.1,
+          "salience": 0.0
+        },
+        {
+          "id": "m50",
+          "score": 0.0,
+          "cosine": 0.0,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m31",
+          "score": 0.0,
+          "cosine": 0.0,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 1.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m30",
+          "score": 0.0,
+          "cosine": 0.0,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 0.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m21",
+          "score": 0.0,
+          "cosine": 0.0,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 1.0
+        }
+      ]
+    },
+    {
+      "name": "world-scope-none",
+      "why": "no world -- the browser -- reaches person memories only, never a save\u0027s",
+      "query": [
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": {
+        "relevance": 1.0,
+        "recency": 0.0,
+        "importance": 0.0,
+        "salience": 0.0
+      },
+      "halfLifeHours": 2184.0,
+      "k": 10,
+      "candidateMultiplier": 2,
+      "scope": {
+        "companionId": "vetta",
+        "includeSuperseded": false
+      },
+      "expected": [
+        {
+          "id": "mw2",
+          "score": 1.0,
+          "cosine": 1.0,
+          "relevance": 1.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m95",
+          "score": 0.125896,
+          "cosine": 0.125896,
+          "relevance": 0.125896,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.458973
+        },
+        {
+          "id": "m96",
+          "score": 0.125749,
+          "cosine": 0.125749,
+          "relevance": 0.125749,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.64425
+        },
+        {
+          "id": "m91",
+          "score": 0.0,
+          "cosine": 0.0,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m90",
+          "score": 0.0,
+          "cosine": 0.0,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m70",
+          "score": 0.0,
+          "cosine": 0.0,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 0.1,
+          "salience": 0.0
+        },
+        {
+          "id": "m50",
+          "score": 0.0,
+          "cosine": 0.0,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 0.0
+        },
+        {
+          "id": "m31",
+          "score": 0.0,
+          "cosine": 0.0,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 1.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m30",
+          "score": 0.0,
+          "cosine": 0.0,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 0.0,
+          "salience": 0.0
+        },
+        {
+          "id": "m21",
+          "score": 0.0,
+          "cosine": 0.0,
+          "relevance": 0.0,
+          "recency": 0.333028,
+          "importance": 0.5,
+          "salience": 1.0
+        }
+      ]
     }
   ]
 }

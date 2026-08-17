@@ -120,6 +120,7 @@ class FixtureTest {
 
    private RetrievalScope scope(JsonObject s) {
       JsonElement companion = s.get("companionId");
+      JsonElement world = s.get("worldId");
       JsonElement partition = s.get("partition");
       Set<MemoryKind> kinds = null;
       if (s.has("kinds")) {
@@ -130,6 +131,7 @@ class FixtureTest {
       }
       return new RetrievalScope(
             companion == null || companion.isJsonNull() ? null : companion.getAsString(),
+            world == null || world.isJsonNull() ? null : world.getAsString(),
             partition == null || partition.isJsonNull() ? null
                   : Partition.valueOf(partition.getAsString()),
             s.get("includeSuperseded").getAsBoolean(),

@@ -83,6 +83,9 @@ public record MemoryRecord(
       MemoryFrame frame,
       String companionId,
       Provenance provenance,
+      MemoryScope scope,
+      String worldId,
+      Place place,
       int vectorRow) {
 
    /** {@link #vectorRow} value meaning "not embedded yet". */
@@ -108,6 +111,25 @@ public record MemoryRecord(
       // hand every companion a fact from a story none of them were in.
       if (frame == MemoryFrame.IN_WORLD && companionId == null) {
          throw new IllegalArgumentException("IN_WORLD memory needs a companionId: " + id);
+      }
+
+      // Scope has no safe default, so it is required rather than inferred. PERSON would make a
+      // mis-classified world fact visible in every save; WORLD needs an id the caller would not
+      // have either. A record that does not know which world it belongs to is a bug, and the
+      // resulting leak is invisible -- a wrong-world memory reads exactly like a right one.
+      Objects.requireNonNull(scope, "scope");
+      if (scope == MemoryScope.WORLD && worldId == null) {
+         throw new IllegalArgumentException("WORLD memory needs a worldId: " + id);
+      }
+      if (scope == MemoryScope.PERSON && worldId != null) {
+         // Not harmless: it means something was classified as true-everywhere while still carrying
+         // the world it came from, which is the signature of a mis-classified world fact.
+         throw new IllegalArgumentException(
+               "PERSON memory must not carry a worldId (" + worldId + "): " + id);
+      }
+      if (place != null && scope != MemoryScope.WORLD) {
+         throw new IllegalArgumentException(
+               "a memory with a place must be WORLD-scoped: " + id);
       }
       if (occurrences < 1) {
          throw new IllegalArgumentException("occurrences must be >= 1, got " + occurrences);
@@ -169,7 +191,7 @@ public record MemoryRecord(
       }
       return new MemoryRecord(id, serial, text, entity, value, occurrences, topicDays, lastSeenAt, kind,
             validFrom, when, recordedAt, invalidatedAt, importance, importanceSource, context, partition, frame, companionId,
-            provenance, vectorRow);
+            provenance, scope, worldId, place, vectorRow);
    }
 
    /**
@@ -184,7 +206,7 @@ public record MemoryRecord(
       }
       return new MemoryRecord(id, serial, text, entity, value, occurrences, topicDays, lastSeenAt, kind,
             validFrom, validTo, recordedAt, when, importance, importanceSource, context, partition, frame, companionId, provenance,
-            vectorRow);
+            scope, worldId, place, vectorRow);
    }
 
    /**
@@ -229,7 +251,7 @@ public record MemoryRecord(
       return new MemoryRecord(id, serial, text, entity, value,
             newDay ? occurrences + 1 : occurrences, newDay ? topicDays + 1 : topicDays, seen, kind, validFrom, validTo, recordedAt,
             invalidatedAt, importance, importanceSource, context, partition, frame, companionId,
-            provenance, vectorRow);
+            provenance, scope, worldId, place, vectorRow);
    }
 
    /** Whether {@code other} confirms this memory rather than contradicting it. */
@@ -242,7 +264,7 @@ public record MemoryRecord(
    public MemoryRecord withVectorRow(int row) {
       return new MemoryRecord(id, serial, text, entity, value, occurrences, topicDays, lastSeenAt, kind,
             validFrom, validTo, recordedAt, invalidatedAt, importance, importanceSource, context,
-            partition, frame, companionId, provenance, row);
+            partition, frame, companionId, provenance, scope, worldId, place, row);
    }
 
    /**
@@ -285,6 +307,10 @@ public record MemoryRecord(
     * canonical constructor rejects it at {@link #build()} rather than storing a plausible blank.
     */
    public static final class Builder {
+      /** Deliberately no default -- see the constructor invariant. */
+      private MemoryScope scope;
+      private String worldId;
+      private Place place;
       private String id;
       private long serial;
       private String text;
@@ -412,6 +438,36 @@ public record MemoryRecord(
          return this;
       }
 
+      /** Required. There is no default; see {@link MemoryScope}. */
+      public Builder scope(MemoryScope v) {
+         this.scope = v;
+         return this;
+      }
+
+      /** Sets {@link MemoryScope#WORLD} and the world it belongs to, in one call. */
+      public Builder inWorld(String v) {
+         this.scope = MemoryScope.WORLD;
+         this.worldId = v;
+         return this;
+      }
+
+      /** Marks this as true of the player everywhere. */
+      public Builder aboutPerson() {
+         this.scope = MemoryScope.PERSON;
+         this.worldId = null;
+         return this;
+      }
+
+      public Builder worldId(String v) {
+         this.worldId = v;
+         return this;
+      }
+
+      public Builder place(Place v) {
+         this.place = v;
+         return this;
+      }
+
       public MemoryRecord build() {
          // A memory has been seen once, when it began: restating that at every call site is
          // redundant and easy to forget. The canonical constructor still rejects null, so a
@@ -424,7 +480,8 @@ public record MemoryRecord(
          }
          return new MemoryRecord(id, serial, text, entity, value, occurrences,
                topicDays, lastSeenAt, kind, validFrom, validTo, recordedAt, invalidatedAt, importance,
-               importanceSource, context, partition, frame, companionId, provenance, vectorRow);
+               importanceSource, context, partition, frame, companionId, provenance,
+               scope, worldId, place, vectorRow);
       }
    }
 }

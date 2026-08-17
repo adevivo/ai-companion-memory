@@ -47,6 +47,7 @@ function loadFixture() {
 function scopeOf(s) {
    return new RetrievalScope(
       s.companionId ?? null,
+      s.worldId ?? null,
       s.partition ?? null,
       Boolean(s.includeSuperseded),
       s.kinds ? new Set(s.kinds) : null);

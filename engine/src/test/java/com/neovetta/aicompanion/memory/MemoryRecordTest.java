@@ -25,6 +25,85 @@ class MemoryRecordTest {
    private static final Instant JUNE = Instant.parse("2026-06-01T00:00:00Z");
    private static final Instant AUGUST = Instant.parse("2026-08-01T00:00:00Z");
 
+   @Nested
+   @DisplayName("Scope — which world a memory belongs to")
+   class Scope {
+
+      @Test
+      @DisplayName("a WORLD memory without a worldId is refused")
+      void worldNeedsAnId() {
+         IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+               () -> base().scope(MemoryScope.WORLD).build());
+         assertTrue(e.getMessage().contains("worldId"), e.getMessage());
+      }
+
+      @Test
+      @DisplayName("a PERSON memory carrying a worldId is refused")
+      void personMustNotCarryAWorld() {
+         // Not harmless: it is the signature of a world fact mis-classified as true everywhere,
+         // which is exactly the mistake that leaks between saves without a symptom.
+         IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+               () -> base().scope(MemoryScope.PERSON).worldId("world-a").build());
+         assertTrue(e.getMessage().contains("worldId"), e.getMessage());
+      }
+
+      @Test
+      @DisplayName("scope has no default — an unscoped record cannot be built")
+      void scopeIsRequired() {
+         assertThrows(NullPointerException.class,
+               () -> MemoryRecord.builder()
+                     .id("x").serial(1L).text("t").entity("e").value("v")
+                     .kind(MemoryKind.FACT).validFrom(MARCH).recordedAt(MARCH)
+                     .importance(0.5f).importanceSource(ImportanceSource.EXTRACTION)
+                     .context(MemoryContext.CHAT).partition(Partition.OWNER)
+                     .frame(MemoryFrame.REAL)
+                     .provenance(new Provenance("s", "c", "m", MARCH.toEpochMilli()))
+                     .build());
+      }
+
+      @Test
+      @DisplayName("a place requires WORLD scope")
+      void placeNeedsAWorld() {
+         IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+               () -> base().aboutPerson().place(new Place("minecraft:overworld", 1, 2, 3)).build());
+         assertTrue(e.getMessage().contains("WORLD"), e.getMessage());
+      }
+
+      @Test
+      @DisplayName("inWorld sets both scope and id, and a place rides along")
+      void inWorldRoundTrips() {
+         MemoryRecord r = base().inWorld("world-a")
+               .place(new Place("minecraft:overworld", 218, 79, 23)).build();
+         assertEquals(MemoryScope.WORLD, r.scope());
+         assertEquals("world-a", r.worldId());
+         assertEquals(218, r.place().x());
+         assertEquals("minecraft:overworld at 218, 79, 23", r.place().toString());
+      }
+
+      @Test
+      @DisplayName("scope survives supersession, retraction and reinforcement")
+      void scopeSurvivesTheWithers() {
+         // These rebuild the record field by field, so a forgotten argument would silently move a
+         // memory to another world — or to no world at all.
+         MemoryRecord r = base().inWorld("world-a")
+               .place(new Place("minecraft:overworld", 1, 2, 3)).build();
+         for (MemoryRecord after : List.of(
+               r.supersededAt(JUNE), r.retractedAt(JUNE), r.reinforcedAt(JUNE),
+               r.withVectorRow(7))) {
+            assertEquals(MemoryScope.WORLD, after.scope());
+            assertEquals("world-a", after.worldId());
+            assertEquals(r.place(), after.place());
+         }
+      }
+
+      @Test
+      @DisplayName("a dimension is required, because (0,64,0) is two different places")
+      void dimensionRequired() {
+         assertThrows(NullPointerException.class, () -> new Place(null, 0, 0, 0));
+         assertThrows(IllegalArgumentException.class, () -> new Place("  ", 0, 0, 0));
+      }
+   }
+
    private static MemoryRecord.Builder base() {
       return MemoryRecord.builder()
             .id("mem-1")
@@ -37,6 +116,7 @@ class MemoryRecordTest {
             .recordedAt(MARCH)
             .importance(0.5f)
             .importanceSource(ImportanceSource.EXTRACTION)
+            .aboutPerson()
             .context(MemoryContext.CHAT)
             .partition(Partition.OWNER)
             .frame(MemoryFrame.REAL)
@@ -114,7 +194,8 @@ class MemoryRecordTest {
                () -> new MemoryRecord("x", 1L, "t", "e", "v", 5, 2, MARCH, MemoryKind.FACT,
                      MARCH, null, MARCH, null, 0.5f, ImportanceSource.EXTRACTION,
                      MemoryContext.CHAT, Partition.OWNER, MemoryFrame.REAL, null,
-                     new Provenance("s", "c", "m", MARCH.toEpochMilli()), MemoryRecord.NO_VECTOR));
+                     new Provenance("s", "c", "m", MARCH.toEpochMilli()),
+                     MemoryScope.PERSON, null, null, MemoryRecord.NO_VECTOR));
       }
 
       @Test
@@ -206,6 +287,7 @@ class MemoryRecordTest {
                .validFrom(MARCH).recordedAt(MARCH).importance(0.5f)
                .context(MemoryContext.CHAT).partition(Partition.OWNER)
                .provenance(new Provenance("s", "c", "m", MARCH.toEpochMilli()))
+               .aboutPerson()
                .build().frame());
       }
 

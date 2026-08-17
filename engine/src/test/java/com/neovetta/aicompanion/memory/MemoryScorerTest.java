@@ -29,6 +29,7 @@ class MemoryScorerTest {
             .recordedAt(MARCH)
             .importance(0.5f)
             .importanceSource(ImportanceSource.EXTRACTION)
+            .aboutPerson()
             .context(MemoryContext.CHAT)
             .partition(Partition.OWNER)
             .frame(MemoryFrame.REAL)
