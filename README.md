@@ -9,6 +9,8 @@ answer had been measured against a corpus of real conversation and ~2,400 human 
 
 ```
 engine/    Java 17, Gson only. Drops into the mod unchanged.
+           …/memory/  the memory engine: records, contradiction resolution, retrieval scoring
+           …/core/    config schemas, server policy, roster ownership, the brain turn contract
 js/        The browser half. Zero dependencies.
 fixture/   28 synthetic records, 21 cases. Both implementations must reproduce it exactly.
 ```
@@ -71,12 +73,32 @@ The workflow for a fix that lives here:
 
 ### Planned expansion, and the name
 
-As of 2026-08-22 this repository holds the memory engine only. The 1.21.11 port is moving the rest of
-the version-neutral layer here — measured at **29 files and ~5,650 lines**, about half of everything
-we ever added to the engine: the memory pipeline, `MemoryGate`, `MemoryHealth`, `MemoryStore`,
-`MemoryLearner`, the config schemas, `ServerPolicy`, `RosterGuard`, `PlayerPreferences`, the brain
-transport contract, and ~1,860 lines of tests that currently re-run per Minecraft version and will
-then run once.
+**Landed 2026-08-22 (0.5.0).** The first hoist out of the engine: 12 source files and 4 test classes,
+3,283 lines, now in `com.neovetta.aicompanion.core` — `LlmConfig`, `MemoryConfig`, `TtsConfig`,
+`BehaviorConfig`, `EmbeddingsConfig`, `ServerPolicy`, `RosterGuard`, `PlayerPreferences`,
+`MemoryGate`, `MemoryHealth`, `BrainTurnContext`, `CompanionTickGuard`. Test count went 115 → 201,
+and those 86 tests now run once rather than once per Minecraft version.
+
+That is fewer files than first estimated, and the estimate was wrong in an instructive way. Scanning
+for `net.minecraft` imports suggested 29 files were free-standing. Two kinds of coupling do not show
+up as imports: **same-package references need none at all**, and several files leaned on small engine
+utilities (`HTTPUtils`, `Utils`, `DirUtil`). A reference scan with comments and string literals
+stripped — Javadoc `{@link}` alone produced nine false positives — gave the real answer.
+
+Still in the engine, deliberately:
+
+- `MemoryExtractor`, `MemoryStore`, `EmbeddingsService` — version-neutral in substance but each leans
+  on one small engine utility. They can follow once those are replaced or inlined; that is a contained
+  piece of work, not a redesign.
+- `MemoryLearner` — genuine glue. It wires `CompanionMemory` to `ConversationHistory` and
+  `Player2APIService`, so it belongs on the Minecraft side.
+- `ConversationHistoryNullContentTest` and `BrainFailureAdviceTest` — same-package tests of engine
+  classes, so they stay with their targets.
+
+⚠️ **The 1.20.1 line still carries its own inline copy of these 12 files.** Until it is migrated to
+depend on 0.5.0, the same logic exists in two places and can drift — exactly what this repository
+exists to prevent. That migration is deliberately sequenced *after* the 1.21.11 port proves the
+layering works, so the shipping line is not disturbed on an unvalidated design.
 
 Once that lands the name `ai-companion-memory` is wrong — it will hold policy, configuration and the
 brain contract as well as memory. A rename to something like `ai-companion-core` is agreed in
@@ -86,7 +108,7 @@ of a Minecraft port would be two hard changes at once. Do it at a quiet moment, 
 ## Run it
 
 ```bash
-cd engine && ./gradlew test     # 94 tests
+cd engine && ./gradlew test     # 201 tests
 cd js      && npm test          # 22 tests, no install needed
 ```
 
