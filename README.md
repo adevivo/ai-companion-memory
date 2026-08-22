@@ -13,6 +13,76 @@ js/        The browser half. Zero dependencies.
 fixture/   28 synthetic records, 21 cases. Both implementations must reproduce it exactly.
 ```
 
+## Its role: the version-neutral core
+
+This repository is the part of AI Companion that **does not know Minecraft exists**, and that is its
+entire value. It has zero `net.minecraft`, `net.fabricmc` or `org.quiltmc` imports, builds as a plain
+Java 17 + Gson project with no Loom and no mappings, and ships into the mod as a jar-in-jar,
+pinned to an exact version.
+
+That property is what makes supporting several Minecraft versions affordable.
+
+### The problem it solves
+
+`ai-companion-mod` targets multiple Minecraft versions, one branch per version (`mc/1.20.1`,
+`mc/1.21.11`, …). Its `engine/` — our fork of PlayerEngine — is re-based per version on upstream's own
+per-version branch, and upstream renamed every package between the versions we forked
+(`baritone.*` and `adris.altoclef.*` became `com.player2.playerengine.*`) and moved to Architectury.
+
+The consequence, measured 2026-08-22: **the engine trees on two branches share no source file paths
+at all.** 733 paths on one, 676 on the other, 12 in common, all 12 build scaffolding. A cherry-picked
+engine fix does not conflict — git finds no file to apply it to.
+
+And that is where the work happens. Of the last 40 commits on the mod's main line, 8 touched only the
+engine and 22 touched both; just 3 were mod-only. So without somewhere version-neutral to put things,
+roughly nine fixes in ten would have to be written twice, by hand, forever — and the tests with them.
+
+### The division of labour
+
+| Belongs **here** | Belongs in the mod's `engine/` |
+|---|---|
+| Memory: records, contradiction resolution, retrieval scoring | Pathfinding, tasks, chains |
+| Extraction, gating, health checks | Mixins and everything version-coupled |
+| Config schemas (LLM, memory, TTS, behaviour, embeddings) | Block and entity interaction |
+| Server policy, roster ownership, player preferences | Structure building |
+| The brain contract (transport interface, turn context) | The Minecraft-side brain plumbing |
+| **The tests for all of the above** | |
+
+The rule of thumb, for anyone adding a file to the mod's `engine/`: **if it does not need Minecraft,
+it does not belong there.** Putting version-neutral logic in the engine signs you up to port it to
+every Minecraft version, forever.
+
+### How the mod consumes it
+
+Built here, staged into `aicompanion/libs/`, nested into the shipped jar (JiJ) and depended on by an
+**exact** version — never `+`. Gradle caches dynamic-version resolution, so restaging a rebuilt jar
+under an unchanged version silently keeps the old one; that has cost real debugging time more than
+once. Gson is deliberately *not* nested alongside it: Minecraft already ships Gson, and a second copy
+on the classpath is a hazard rather than a redundancy.
+
+The workflow for a fix that lives here:
+
+1. Fix it once, here, on `main`. There are no version branches in this repository and there should
+   never be one — a per-Minecraft-version branch of version-neutral code is a contradiction, and an
+   invitation for someone to make one copy quietly version-specific.
+2. Cut a release and bump `version` in `engine/build.gradle`.
+3. Bump the pin in `aicompanion/build.gradle` on each live `mc/*` branch. That file **is** a shared
+   path across those branches, so the bump is a genuine one-line cherry-pick.
+
+### Planned expansion, and the name
+
+As of 2026-08-22 this repository holds the memory engine only. The 1.21.11 port is moving the rest of
+the version-neutral layer here — measured at **29 files and ~5,650 lines**, about half of everything
+we ever added to the engine: the memory pipeline, `MemoryGate`, `MemoryHealth`, `MemoryStore`,
+`MemoryLearner`, the config schemas, `ServerPolicy`, `RosterGuard`, `PlayerPreferences`, the brain
+transport contract, and ~1,860 lines of tests that currently re-run per Minecraft version and will
+then run once.
+
+Once that lands the name `ai-companion-memory` is wrong — it will hold policy, configuration and the
+brain contract as well as memory. A rename to something like `ai-companion-core` is agreed in
+principle and deliberately deferred: renaming the repository, directory and artifact id in the middle
+of a Minecraft port would be two hard changes at once. Do it at a quiet moment, not during.
+
 ## Run it
 
 ```bash
