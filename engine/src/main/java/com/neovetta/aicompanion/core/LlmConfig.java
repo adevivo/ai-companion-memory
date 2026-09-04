@@ -180,12 +180,19 @@ public final class LlmConfig {
      * to think without one would fail every turn and fall back, paying the timeout each time. When
      * {@code localMode} is false this switch is ignored and the server keeps thinking.
      *
-     * <p>Falling back is normal, not exceptional: a vanilla client, an out-of-date one, or one that
-     * simply does not answer must never leave a companion mute. See {@code NetworkBrainTransport}.
+     * <p>Falling back is normal, not exceptional: an out-of-date client, or one that simply does not
+     * answer, must never leave a companion mute. See {@code NetworkBrainTransport}.
+     *
+     * <p><b>Defaults to true since 2026-08-24.</b> It defaulted to false to protect vanilla clients,
+     * and that case does not exist: this mod registers an entity, so registry sync refuses a vanilla
+     * client at the login screen — every client that reaches the capability handshake necessarily has
+     * the mod. The old default therefore protected nobody and cost everybody, quietly, in the way
+     * this switch always fails: the companion answers, so nothing looks wrong, but it answers from
+     * the server's corpus and the server's bill and has never heard of the player it belongs to.
      */
     public static volatile boolean clientBrain =
             Boolean.parseBoolean(resolve("aicompanion.llm.clientBrain",
-                    "AICOMPANION_LLM_CLIENTBRAIN", "false"));
+                    "AICOMPANION_LLM_CLIENTBRAIN", "true"));
 
     /**
      * How long the server waits for a client to think before doing it itself, in milliseconds.
