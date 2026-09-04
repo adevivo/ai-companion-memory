@@ -29,6 +29,7 @@ labels.jsonl
 build/
 .gradle/
 out/
+logs/
 node_modules/
 *.class
 *.jar
