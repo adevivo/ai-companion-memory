@@ -24,6 +24,24 @@ pinned to an exact version.
 
 That property is what makes supporting several Minecraft versions affordable.
 
+Where it sits in the download (the mod lives at
+[github.com/adevivo/ai-companion](https://github.com/adevivo/ai-companion)):
+
+```mermaid
+flowchart TB
+  subgraph jar["aicompanion-0.4.0+mc1.21.11.jar: the one download"]
+    mod["<b>AI Companion</b> (the mod)<br/>companion entity · /companion · chat routing<br/>settings screen · HUDs · client brain"]
+    pe["<b>PlayerEngine</b> (bundled fork, LGPL)<br/>pathfinding · tasks · combat · building<br/>model calls · conversation"]
+    mem["<b>aicompanion-memory</b> (bundled)<br/>memory records · recall scoring<br/>settings and server rules<br/><i>no Minecraft code</i>"]
+  end
+  mod --> pe
+  mod --> mem
+  pe --> mem
+  repoMod["github.com/adevivo/ai-companion<br/>one branch per Minecraft version"] -. builds .-> mod
+  repoMod -. builds .-> pe
+  repoMem["github.com/adevivo/ai-companion-memory<br/>one version for every Minecraft"] -. builds .-> mem
+```
+
 ### The problem it solves
 
 `ai-companion-mod` targets multiple Minecraft versions, one branch per version (`mc/1.20.1`,
