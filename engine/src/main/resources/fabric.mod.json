@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "aicompanion-memory",
+  "version": "${version}",
+  "name": "AI Companion Memory",
+  "description": "The version-neutral core of AI Companion: long-term memory records and recall scoring, and the settings and server rules shared by every Minecraft version. Contains no Minecraft code. Bundled inside AI Companion; not installed on its own.",
+  "authors": ["NeoVetta"],
+  "contact": {
+    "homepage": "https://github.com/adevivo/ai-companion-memory",
+    "sources": "https://github.com/adevivo/ai-companion-memory",
+    "issues": "https://github.com/adevivo/ai-companion/issues"
+  },
+  "license": "LGPL-3.0-or-later",
+  "environment": "*",
+  "custom": {
+    "modmenu": {
+      "badges": ["library"],
+      "parent": "aicompanion"
+    }
+  }
+}

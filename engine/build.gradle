@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.neovetta.aicompanion'
-version = '0.5.0'
+version = '0.5.1'
 
 application {
     mainClass = 'com.neovetta.aicompanion.memory.CorpusValidator'
@@ -45,6 +45,22 @@ java {
 tasks.withType(JavaCompile).configureEach {
     options.release = 17
     options.encoding = 'UTF-8'
+}
+
+// Metadata and licence inside the jar itself. Before 0.5.1 the mod's build generated a stub
+// fabric.mod.json for this jar (id libs_aicompanion-memory, no licence, no author, no links), and
+// no licence file travelled with it. It is nested inside a jar that declares LGPL, and CurseForge
+// reviewers open nested jars: the same shape as the PlayerEngine metadata flagged in August.
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('fabric.mod.json') {
+        expand 'version': project.version
+    }
+}
+
+jar {
+    from('../LICENSE') { into 'META-INF' }
+    from('../LICENSE.GPL-3.0.txt') { into 'META-INF' }
 }
 
 test {
