@@ -40,3 +40,6 @@ node_modules/
 .idea/
 *.iml
 .vscode/
+
+# --- private working notes: kept on disk, never tracked ---
+excluded/
