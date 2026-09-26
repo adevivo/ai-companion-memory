@@ -202,4 +202,5 @@ unvalidated interface would break the property that makes it worth trusting.
 
 ## Licence
 
-LGPL-3.0-or-later, matching `ai-companion-mod`.
+LGPL-3.0-or-later, matching `ai-companion-mod`. See [LICENSE](LICENSE); the LGPL builds on the GNU GPL v3,
+whose text is in [LICENSE.GPL-3.0.txt](LICENSE.GPL-3.0.txt).
